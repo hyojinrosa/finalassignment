@@ -184,7 +184,7 @@ export function LearningTab() {
                       {note.koreanName} ({note.hanja})
                     </p>
                     <p className="text-xs text-stone-500">
-                      기준음 {note.westernNote} · {freq.toFixed(1)} Hz
+                      기준음 {note.westernNote}({note.solfege}) · {freq.toFixed(1)} Hz
                     </p>
                   </div>
                 </div>

@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { MainLayout } from './components/layout/MainLayout';
 import { LearningTab } from './components/tabs/LearningTab';
 import { PracticeTab } from './components/tabs/PracticeTab';
+import { RhythmGameTab } from './components/tabs/RhythmGameTab';
 import { VirtualInstrumentTab } from './components/tabs/VirtualInstrumentTab';
 import { useAudioPitch } from './hooks/useAudioPitch';
 import type { AppTabId } from './types/danso';
@@ -36,6 +37,7 @@ export function App() {
           onCameraActiveChange={handleCameraActiveChange}
         />
       )}
+      {activeTab === 'rhythm' && <RhythmGameTab audioPitch={audioPitch} />}
       {activeTab === 'virtual' && <VirtualInstrumentTab />}
     </MainLayout>
   );

@@ -1,0 +1,78 @@
+[
+  {
+    "id": "saeya-saeya",
+    "title": "새야 새야 파랑새야",
+    "jangdan": "중모리장단 (4박)",
+    "beatsPerMeasure": 4,
+    "bpm": 78,
+    "description": "중·임·무·황·태 5음과 박자(duration)로 차분하게 익히는 전래 민요 악보입니다.",
+    "cells": [
+      { "note": "황", "duration": 1, "label": "새" },
+      { "note": "황", "duration": 1, "label": "야" },
+      { "note": "무", "duration": 1, "label": "새" },
+      { "note": "황", "duration": 1, "label": "야" },
+      { "note": "임", "duration": 1, "label": "파" },
+      { "note": "중", "duration": 1, "label": "랑" },
+      { "note": "임", "duration": 1, "label": "새" },
+      { "note": "무", "duration": 2, "label": "야" },
+      { "note": "태", "duration": 1, "label": "녹" },
+      { "note": "황", "duration": 1, "label": "두" },
+      { "note": "무", "duration": 1, "label": "밭" },
+      { "note": "황", "duration": 1, "label": "에" },
+      { "note": "임", "duration": 1, "label": "앉" },
+      { "note": "중", "duration": 1, "label": "지" },
+      { "note": "임", "duration": 1, "label": "마" },
+      { "note": "중", "duration": 2, "label": "라" }
+    ]
+  },
+  {
+    "id": "arirang",
+    "title": "아리랑 (단소 5음 편곡)",
+    "jangdan": "세마치장단 (3박)",
+    "beatsPerMeasure": 3,
+    "bpm": 84,
+    "description": "중·임·무·황·태 5음으로 구성한 대표 민요 아리랑 샘플 악보입니다.",
+    "cells": [
+      { "note": "중", "duration": 1, "label": "아" },
+      { "note": "임", "duration": 1, "label": "리" },
+      { "note": "무", "duration": 1, "label": "랑" },
+      { "note": "황", "duration": 1, "label": "아" },
+      { "note": "무", "duration": 1, "label": "리" },
+      { "note": "임", "duration": 2, "label": "랑" },
+      { "note": "중", "duration": 1, "label": "아" },
+      { "note": "임", "duration": 1, "label": "라" },
+      { "note": "무", "duration": 1, "label": "리" },
+      { "note": "황", "duration": 1, "label": "요" },
+      { "note": "태", "duration": 1 },
+      { "note": "황", "duration": 1 },
+      { "note": "무", "duration": 1, "label": "아" },
+      { "note": "임", "duration": 1, "label": "리" },
+      { "note": "중", "duration": 1, "label": "랑" },
+      { "note": "임", "duration": 1, "label": "고" },
+      { "note": "무", "duration": 1, "label": "개" },
+      { "note": "중", "duration": 2, "label": "로" }
+    ]
+  },
+  {
+    "id": "doraji",
+    "title": "도라지 타령 (단소 연습)",
+    "jangdan": "세마치장단 (3박)",
+    "beatsPerMeasure": 3,
+    "bpm": 88,
+    "description": "경쾌한 리듬으로 황·태·무·임·중 도약을 연습하는 악보입니다.",
+    "cells": [
+      { "note": "황", "duration": 1, "label": "도" },
+      { "note": "황", "duration": 1, "label": "라" },
+      { "note": "황", "duration": 1, "label": "지" },
+      { "note": "태", "duration": 1, "label": "도" },
+      { "note": "황", "duration": 1, "label": "라" },
+      { "note": "무", "duration": 2, "label": "지" },
+      { "note": "임", "duration": 1, "label": "백" },
+      { "note": "무", "duration": 1, "label": "도" },
+      { "note": "황", "duration": 1, "label": "라" },
+      { "note": "무", "duration": 1, "label": "지" },
+      { "note": "임", "duration": 1 },
+      { "note": "중", "duration": 2 }
+    ]
+  }
+]

@@ -12,7 +12,7 @@ const YIN_FALLBACK_THRESHOLD = 0.32;
 
 const WESTERN_NOTE_NAMES = [
   'C',
-  'C#',
+  'D♭',
   'D',
   'E♭',
   'E',

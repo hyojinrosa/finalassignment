@@ -65,12 +65,12 @@ export class ToneDansoEngine {
       await Tone.start();
       const sampleRate = Tone.getContext().sampleRate;
 
-      // 단소 기본 음역(중 A♭4=415.3Hz, 무 C5=523.25Hz, 태 F5=698.46Hz)에 맞춘 멀티 샘플 버퍼 생성
+      // 단소 기본 음역(중 A♭4=415.3Hz, 무 D♭5=554.37Hz, 태 F5=698.46Hz)에 맞춘 멀티 샘플 버퍼 생성
       const sampleAb4 = new Tone.ToneAudioBuffer(
         this.buildSampleBuffer(415.3, sampleRate),
       );
-      const sampleC5 = new Tone.ToneAudioBuffer(
-        this.buildSampleBuffer(523.25, sampleRate),
+      const sampleDb5 = new Tone.ToneAudioBuffer(
+        this.buildSampleBuffer(554.37, sampleRate),
       );
       const sampleF5 = new Tone.ToneAudioBuffer(
         this.buildSampleBuffer(698.46, sampleRate),
@@ -95,7 +95,7 @@ export class ToneDansoEngine {
       this.sampler = new Tone.Sampler({
         urls: {
           'G#4': sampleAb4,
-          C5: sampleC5,
+          'C#5': sampleDb5,
           F5: sampleF5,
         },
         attack: 0.03,

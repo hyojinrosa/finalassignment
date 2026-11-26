@@ -1,7 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Webcam from 'react-webcam';
-import { Hands, HAND_CONNECTIONS, type Results } from '@mediapipe/hands';
-import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils';
+import {
+  Hands,
+  HAND_CONNECTIONS,
+  drawConnectors,
+  drawLandmarks,
+  type Results,
+} from '../../utils/mediapipe';
 import { Camera, CameraOff, CircleCheck, CircleDot } from 'lucide-react';
 import type { HoleStates } from '../../types/danso';
 import {

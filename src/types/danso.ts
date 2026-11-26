@@ -1,4 +1,4 @@
-export type AppTabId = 'learning' | 'practice' | 'virtual';
+export type AppTabId = 'learning' | 'practice' | 'rhythm' | 'virtual';
 
 export type DansoYulmyeong = '중' | '임' | '무' | '황' | '태';
 
@@ -17,6 +17,7 @@ export interface DansoNote {
   oheum: GugakOheum;
   oheumHanja: string;
   westernNote: string;
+  solfege: string;
   frequencyHz: number;
   holes: HoleStates;
   description: string;
