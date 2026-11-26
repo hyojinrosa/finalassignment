@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Pretendard Variable", "Pretendard", "Noto Sans KR", ui-sans-serif, system-ui, sans-serif;
+  --color-bamboo-50: #f7f8f3;
+  --color-bamboo-100: #ecefe3;
+  --color-bamboo-500: #5c7c47;
+  --color-bamboo-600: #486336;
+  --color-bamboo-700: #394f2b;
+  --color-hanji: #faf7f0;
+}
+
+@keyframes breath-flow {
+  0% {
+    transform: translate(-10px, -6px) scale(0.85);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate(2px, 1px) scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(12px, 8px) scale(1.1);
+    opacity: 0.15;
+  }
+}
+
+@keyframes finger-tap {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-3px);
+  }
+}
+
+.animate-breath-flow {
+  animation: breath-flow 1.8s ease-in-out infinite;
+}
+
+.animate-finger-tap {
+  animation: finger-tap 1.4s ease-in-out infinite;
+}
