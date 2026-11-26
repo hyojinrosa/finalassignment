@@ -181,8 +181,32 @@ export function VirtualInstrumentTab({
         </div>
 
         <div className="mt-6 grid grid-cols-1 items-start gap-6 md:grid-cols-12">
-          {/* 실물 비율 가상 단소 몸체 */}
-          <div className="flex flex-col items-center gap-4 rounded-xl bg-hanji p-6 md:col-span-5">
+          {/* 실물 비율 가상 단소 몸체 + 단소 요정 가이드 */}
+          <div className="relative flex flex-col items-center gap-4 rounded-xl bg-hanji p-6 md:col-span-5">
+            {/* 단소 구멍 옆 단소 요정 (정확한 율명 운지 시 반짝임 + 하트) */}
+            <div className="absolute top-4 right-4 z-20 flex flex-col items-center">
+              {matchedNote && (
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none -mb-1 text-sm animate-float-heart"
+                >
+                  💖✨
+                </span>
+              )}
+              <img
+                src="/fairy.png"
+                alt="단소 요정"
+                className={`h-14 w-14 object-contain transition-transform duration-300 ${
+                  matchedNote
+                    ? 'scale-110 drop-shadow-[0_0_10px_rgba(244,114,182,0.75)]'
+                    : 'opacity-85'
+                }`}
+              />
+              <span className="mt-0.5 rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-bold text-pink-700 shadow-2xs">
+                {matchedNote ? `${matchedNote.id} 완성!` : '운지를 맞춰봐'}
+              </span>
+            </div>
+
             <div className="relative h-[440px] w-14 rounded-full border-2 border-amber-800/35 bg-gradient-to-r from-amber-200 via-amber-100 to-amber-300 shadow-inner">
               {/* 취구 */}
               <div
@@ -351,6 +375,19 @@ export function VirtualInstrumentTab({
           onSongComplete={onSongComplete}
         />
       </section>
+
+      {/* 우측 하단 고정: 단소 불며 응원하는 아기 호랑이 마스코트 */}
+      <div className="pointer-events-none fixed right-4 bottom-24 z-40 hidden items-end gap-2 sm:flex">
+        <span className="rounded-2xl border border-amber-200 bg-white/95 px-3 py-1.5 text-xs font-extrabold text-amber-900 shadow-md">
+          {matchedNote ? `${matchedNote.id} 소리 정말 맑다! 🐯` : '구멍을 눌러 소리를 내보자!'}
+        </span>
+        <img
+          src="/tiger.png"
+          alt="응원하는 아기 호랑이 마스코트"
+          className="h-20 w-20 object-contain drop-shadow-md animate-bounce"
+          style={{ animationDuration: '2.4s' }}
+        />
+      </div>
     </div>
   );
 }

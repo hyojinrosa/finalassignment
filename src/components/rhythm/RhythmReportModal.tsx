@@ -191,15 +191,22 @@ export function RhythmReportModal({
             </div>
           </div>
 
-          {/* 약점 분석 피드백 */}
-          <div className="rounded-xl border border-amber-200 bg-amber-50/80 p-4">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-amber-900">
-              <Target className="h-4 w-4 text-amber-700" />
-              <span>맞춤 학습 피드백</span>
+          {/* 약점 분석 피드백 + 우아하게 등장하는 가야금 여인 */}
+          <div className="flex items-center gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 animate-fade-in-up">
+            <img
+              src="/gayageum.png"
+              alt="칭찬하는 가야금 타는 여인"
+              className="relative z-10 h-16 w-16 shrink-0 object-contain drop-shadow-sm"
+            />
+            <div>
+              <div className="flex items-center gap-1.5 text-xs font-bold text-amber-900">
+                <Target className="h-4 w-4 text-amber-700" />
+                <span>맞춤 학습 피드백</span>
+              </div>
+              <p className="mt-1 text-sm font-semibold leading-relaxed text-stone-800">
+                “{feedbackText}”
+              </p>
             </div>
-            <p className="mt-1.5 text-sm font-semibold leading-relaxed text-stone-800">
-              “{feedbackText}”
-            </p>
           </div>
 
           {/* 장단 묶음별 정확도 그래프 */}
@@ -230,13 +237,12 @@ export function RhythmReportModal({
                     </div>
                     <div className="mt-1 h-2 w-full overflow-hidden rounded-full bg-stone-100">
                       <div
-                        className={`h-full rounded-full ${
-                          rate >= 80
+                        className={`h-full rounded-full ${rate >= 80
                             ? 'bg-emerald-500'
                             : rate >= 50
                               ? 'bg-amber-500'
                               : 'bg-rose-500'
-                        }`}
+                          }`}
                         style={{ width: `${rate}%` }}
                       />
                     </div>

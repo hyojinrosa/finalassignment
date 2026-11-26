@@ -136,50 +136,64 @@ export function HomeMenuScreen({ progress, onEditName }: HomeMenuScreenProps) {
         </div>
       </section>
 
-      {/* 메인 2단 구성: 왼쪽 5개 커다란 카드형 메뉴 + 오른쪽 나의 기록 */}
+      {/* 메인 2단 구성: 왼쪽 꼬마 세종대왕 가이드 + 5개 커다란 카드형 메뉴 + 오른쪽 나의 기록 */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-        <section
-          aria-label="학습 메뉴 선택"
-          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-8"
-        >
-          {MENU_CARDS.map((card, index) => {
-            const Icon = card.icon;
-            const isFullWidthLast = index === MENU_CARDS.length - 1;
+        <div className="space-y-4 lg:col-span-8">
+          {/* 메뉴 가이드: 둥둥 떠다니는 꼬마 세종대왕 & 말풍선 */}
+          <div className="relative flex items-center gap-3 rounded-3xl border-2 border-amber-200/80 bg-white/85 px-4 py-3 shadow-xs">
+            <img
+              src="/sejong.png"
+              alt="안내하는 꼬마 세종대왕"
+              className="relative z-10 h-16 w-16 shrink-0 object-contain drop-shadow-sm animate-bounce"
+            />
+            <div className="relative rounded-2xl border border-amber-200 bg-amber-50/80 px-4 py-2.5 text-xs font-bold text-stone-700 sm:text-sm">
+              “원하는 단소 수업을 골라 보시오! 어느 길로 떠나볼까?”
+            </div>
+          </div>
 
-            return (
-              <button
-                key={card.path}
-                type="button"
-                onClick={() => navigate(card.path)}
-                className={`group flex items-start gap-4 rounded-3xl border-2 p-5 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg ${
-                  card.cardClasses
-                } ${isFullWidthLast ? 'sm:col-span-2' : ''}`}
-              >
-                <span
-                  className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-sm transition-transform group-hover:scale-105 ${card.iconBgClasses}`}
+          <section
+            aria-label="학습 메뉴 선택"
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2"
+          >
+            {MENU_CARDS.map((card, index) => {
+              const Icon = card.icon;
+              const isFullWidthLast = index === MENU_CARDS.length - 1;
+
+              return (
+                <button
+                  key={card.path}
+                  type="button"
+                  onClick={() => navigate(card.path)}
+                  className={`group flex items-start gap-4 rounded-3xl border-2 p-5 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg ${
+                    card.cardClasses
+                  } ${isFullWidthLast ? 'sm:col-span-2' : ''}`}
                 >
-                  <Icon className="h-7 w-7" />
-                </span>
+                  <span
+                    className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-sm transition-transform group-hover:scale-105 ${card.iconBgClasses}`}
+                  >
+                    <Icon className="h-7 w-7" />
+                  </span>
 
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-lg font-extrabold text-stone-900">
-                      {card.title}
-                    </h3>
-                    {card.badge && (
-                      <span className="rounded-full bg-rose-500 px-2.5 py-0.5 text-[11px] font-bold text-white">
-                        {card.badge}
-                      </span>
-                    )}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-lg font-extrabold text-stone-900">
+                        {card.title}
+                      </h3>
+                      {card.badge && (
+                        <span className="rounded-full bg-rose-500 px-2.5 py-0.5 text-[11px] font-bold text-white">
+                          {card.badge}
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-1 text-xs leading-relaxed text-stone-600 sm:text-sm">
+                      {card.subtitle}
+                    </p>
                   </div>
-                  <p className="mt-1 text-xs leading-relaxed text-stone-600 sm:text-sm">
-                    {card.subtitle}
-                  </p>
-                </div>
-              </button>
-            );
-          })}
-        </section>
+                </button>
+              );
+            })}
+          </section>
+        </div>
 
         {/* 오른쪽: 나의 기록 & 배지 도감 */}
         <aside

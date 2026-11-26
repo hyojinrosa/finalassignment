@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Award, Camera, Mic, Music2, Settings, Sparkles } from 'lucide-react';
+import { Award, Camera, Mic, Settings, Sparkles } from 'lucide-react';
 import type { MilestoneBadge } from '../../utils/userProgressStorage';
 
 interface HeaderProps {
@@ -24,8 +24,17 @@ export function Header({
           to="/"
           className="flex items-center gap-3 text-left transition-opacity hover:opacity-85"
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 text-white shadow-sm">
-            <Music2 className="h-5 w-5" />
+          <div className="relative flex h-12 w-12 shrink-0 items-center justify-center">
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 rounded-full border-2 border-dashed border-amber-400/70 animate-spin"
+              style={{ animationDuration: '6s' }}
+            />
+            <img
+              src="/sogo_boy.png"
+              alt="상모 돌리는 소고 소년"
+              className="relative z-10 h-11 w-11 object-contain drop-shadow-xs animate-wiggle"
+            />
           </div>
           <div>
             <div className="flex items-center gap-2">

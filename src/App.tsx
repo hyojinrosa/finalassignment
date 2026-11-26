@@ -78,7 +78,7 @@ export function App() {
   }, []);
 
   if (isEntering) {
-    return <LoadingScreen message="소리마루로 입장하는 중..." />;
+    return <LoadingScreen message="국악 마을로 가는 중..." />;
   }
 
   return (

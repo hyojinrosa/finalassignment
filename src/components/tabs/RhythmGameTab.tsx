@@ -99,10 +99,13 @@ export function RhythmGameTab({ audioPitch, onGameComplete }: RhythmGameTabProps
   const [outcomes, setOutcomes] = useState<NoteOutcome[]>([]);
   const [isReportOpen, setIsReportOpen] = useState(false);
 
-  // 장단 시각 비트 (구음 인덱스, 화면 흔들림 키, 파티클)
+  // 장단 시각 비트 (구음 인덱스, 화면 흔들림 키, 파티클, 캐릭터 리액션)
   const [activeStepIdx, setActiveStepIdx] = useState<number>(-1);
   const [shakeKey, setShakeKey] = useState(0);
   const [particles, setParticles] = useState<BurstParticle[]>([]);
+  const [mascotMood, setMascotMood] = useState<
+    'idle' | 'excellent' | 'good' | 'miss'
+  >('idle');
 
   const dansoSynthRef = useRef<ToneDansoEngine | null>(null);
   const jangdanAudioRef = useRef<JangdanAudioEngine | null>(null);
@@ -112,6 +115,20 @@ export function RhythmGameTab({ audioPitch, onGameComplete }: RhythmGameTabProps
   const outcomesRef = useRef<NoteOutcome[]>([]);
   const lastPitchNoteRef = useRef<DansoYulmyeong | null>(null);
   const particleIdRef = useRef(0);
+  const moodTimerRef = useRef<number | null>(null);
+
+  const triggerMascotMood = useCallback(
+    (mood: 'excellent' | 'good' | 'miss') => {
+      if (moodTimerRef.current !== null) {
+        window.clearTimeout(moodTimerRef.current);
+      }
+      setMascotMood(mood);
+      moodTimerRef.current = window.setTimeout(() => {
+        setMascotMood('idle');
+      }, 650);
+    },
+    [],
+  );
 
   const selectedJangdan: JangdanPreset = useMemo(
     () =>
@@ -308,6 +325,7 @@ export function RhythmGameTab({ audioPitch, onGameComplete }: RhythmGameTabProps
       if (!target) {
         setCombo(0);
         setJudgement({ text: `아쉬워요 (${yulmyeong})`, tone: 'miss' });
+        triggerMascotMood('miss');
         return;
       }
 
@@ -337,6 +355,7 @@ export function RhythmGameTab({ audioPitch, onGameComplete }: RhythmGameTabProps
           : `좋아요! (${yulmyeong})`,
         tone: isExcellent ? 'excellent' : 'good',
       });
+      triggerMascotMood(isExcellent ? 'excellent' : 'good');
 
       const laneX = laneIndex * 20 + 10;
       spawnParticles(
@@ -346,7 +365,7 @@ export function RhythmGameTab({ audioPitch, onGameComplete }: RhythmGameTabProps
         isExcellent ? 10 : 6,
       );
     },
-    [isPlaying, spawnParticles],
+    [isPlaying, spawnParticles, triggerMascotMood],
   );
 
   // 배경 장구(덩, 쿵, 따) 비트 스케줄러 + 강약 시각 효과
@@ -414,6 +433,7 @@ export function RhythmGameTab({ audioPitch, onGameComplete }: RhythmGameTabProps
           setOutcomes([...outcomesRef.current]);
           setCombo(0);
           setJudgement({ text: `아쉬워요 (${note.yulmyeong})`, tone: 'miss' });
+          triggerMascotMood('miss');
         }
         if (Math.abs(elapsed - note.targetTimeMs) <= 250) {
           newestActive = note.cellIndex;
@@ -457,7 +477,7 @@ export function RhythmGameTab({ audioPitch, onGameComplete }: RhythmGameTabProps
         cancelAnimationFrame(rafRef.current);
       }
     };
-  }, [isPlaying, onGameComplete, selectedJangdan.name, selectedScore.title]);
+  }, [isPlaying, onGameComplete, selectedJangdan.name, selectedScore.title, triggerMascotMood]);
 
   // 마이크 음정 입력 자동 판정
   useEffect(() => {
@@ -773,6 +793,63 @@ export function RhythmGameTab({ audioPitch, onGameComplete }: RhythmGameTabProps
 
               {/* 하단 가로 단소 몸통 바 & 판정선 (구멍 버튼과 정확히 일치) */}
               <div className="pointer-events-none absolute inset-x-0 bottom-24 h-1 bg-emerald-400/85 shadow-[0_0_12px_rgba(52,211,153,0.95)]" />
+
+              {/* 장단 도우미 캐릭터 (좌: 장구 치는 소녀, 우: 한복 토끼) */}
+              <div
+                className={`pointer-events-none absolute bottom-25 left-2 z-20 flex flex-col items-center transition-all duration-200 ${
+                  mascotMood === 'excellent'
+                    ? 'scale-115 -translate-y-2.5 drop-shadow-[0_0_12px_rgba(52,211,153,0.8)]'
+                    : mascotMood === 'good'
+                      ? 'scale-105 -translate-y-1'
+                      : mascotMood === 'miss'
+                        ? 'scale-95 translate-y-1 grayscale-[35%] opacity-85 animate-wiggle'
+                        : 'scale-100'
+                }`}
+              >
+                {mascotMood === 'excellent' && (
+                  <span className="mb-0.5 rounded-full bg-emerald-500 px-2 py-0.5 text-[10px] font-black text-white shadow-sm">
+                    신난다! ✨
+                  </span>
+                )}
+                {mascotMood === 'miss' && (
+                  <span className="mb-0.5 rounded-full bg-rose-500 px-2 py-0.5 text-[10px] font-black text-white shadow-sm">
+                    💦 앗!
+                  </span>
+                )}
+                <img
+                  src="/janggu_girl.png"
+                  alt="장구 치는 소녀"
+                  className="h-16 w-16 object-contain drop-shadow-md sm:h-20 sm:w-20"
+                />
+              </div>
+
+              <div
+                className={`pointer-events-none absolute right-2 bottom-25 z-20 flex flex-col items-center transition-all duration-200 ${
+                  mascotMood === 'excellent'
+                    ? 'scale-115 -translate-y-2.5 drop-shadow-[0_0_12px_rgba(251,191,36,0.85)]'
+                    : mascotMood === 'good'
+                      ? 'scale-105 -translate-y-1'
+                      : mascotMood === 'miss'
+                        ? 'scale-95 translate-y-1 grayscale-[35%] opacity-85 animate-wiggle'
+                        : 'scale-100'
+                }`}
+              >
+                {mascotMood === 'excellent' && (
+                  <span className="mb-0.5 rounded-full bg-amber-400 px-2 py-0.5 text-[10px] font-black text-stone-900 shadow-sm">
+                    최고야! 🎉
+                  </span>
+                )}
+                {mascotMood === 'miss' && (
+                  <span className="mb-0.5 rounded-full bg-stone-600 px-2 py-0.5 text-[10px] font-black text-white shadow-sm">
+                    💦 으앙
+                  </span>
+                )}
+                <img
+                  src="/rabbit.png"
+                  alt="한복 토끼"
+                  className="h-16 w-16 object-contain drop-shadow-md sm:h-20 sm:w-20"
+                />
+              </div>
 
               {/* 파티클 효과 */}
               {particles.map((pt) => (

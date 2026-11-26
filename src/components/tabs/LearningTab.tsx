@@ -332,6 +332,25 @@ export function LearningTab() {
                 />
               </div>
             </div>
+
+            {/* 판소리 할아버지 명창의 국악 이론 팁 */}
+            <div className="flex items-center gap-3 rounded-xl border border-amber-200 bg-amber-50/75 p-3.5">
+              <img
+                src="/grandpa.png"
+                alt="판소리 할아버지 명창 선생님"
+                className="relative z-10 h-14 w-14 shrink-0 object-contain drop-shadow-xs"
+              />
+              <div className="text-xs leading-relaxed text-stone-700">
+                <p className="font-extrabold text-amber-900">
+                  명창 할아버지의 단소 원리 교실
+                </p>
+                <p className="mt-0.5">
+                  “단소를 몸과 45° 각도로 기울여 입김이 취구 모서리에 맑게
+                  부딪치게 하거라. 손가락 끝 살로 지공을 빈틈없이 막아야 맑은
+                  중·임·무·황·태 소리가 난단다.”
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -509,11 +509,18 @@ export function ScoreViewer({
       {/* 현재 연주 목표 바 + 네비게이션 */}
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-stone-200 bg-stone-50 px-4 py-3">
         {isCompleted ? (
-          <div className="flex items-center gap-2 text-emerald-700">
-            <CheckCircle2 className="h-5 w-5" />
-            <span className="text-sm font-bold">
-              ‘{selectedScore.title}’ 한 곡을 모두 완주했습니다!
-            </span>
+          <div className="flex items-center gap-3 text-emerald-700 animate-fade-in-up">
+            <img
+              src="/gayageum.png"
+              alt="축하하는 가야금 여인"
+              className="relative z-10 h-12 w-12 shrink-0 object-contain drop-shadow-xs"
+            />
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="h-5 w-5 shrink-0" />
+              <span className="text-sm font-bold">
+                ‘{selectedScore.title}’ 한 곡을 우아하게 완주했습니다!
+              </span>
+            </div>
           </div>
         ) : (
           <div className="flex flex-wrap items-center gap-3 text-xs">

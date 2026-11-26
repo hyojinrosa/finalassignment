@@ -100,10 +100,38 @@ export function PracticeTab({
           />
         </div>
 
-        {/* 오른쪽: 목표 율명 & 통합 피드백 (운지 + 음정) */}
+        {/* 오른쪽: 목표 율명 & 단소 요정 운지법 가이드 & 통합 피드백 */}
         <div className="flex flex-col gap-5 lg:col-span-5">
-          <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
-            <h3 className="text-sm font-bold text-stone-900">목표 율명 선택</h3>
+          <div className="relative rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
+            <div className="flex items-center justify-between gap-2">
+              <h3 className="text-sm font-bold text-stone-900">목표 율명 선택</h3>
+
+              {/* 단소 요정 운지법 가이드 (정확히 짚으면 반짝임 + 하트 이펙트) */}
+              <div className="relative flex items-center gap-2">
+                {(isFingeringMatched || isPitchMatched) && (
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -top-3 right-2 z-20 text-sm animate-float-heart"
+                  >
+                    💖✨
+                  </span>
+                )}
+                <img
+                  src="/fairy.png"
+                  alt="단소 요정 운지 가이드"
+                  className={`relative z-10 h-11 w-11 object-contain transition-transform duration-300 ${
+                    isFingeringMatched || isPitchMatched
+                      ? 'scale-115 drop-shadow-[0_0_10px_rgba(244,114,182,0.7)]'
+                      : ''
+                  }`}
+                />
+                <span className="rounded-full bg-pink-50 px-2.5 py-1 text-[11px] font-bold text-pink-700">
+                  {isFingeringMatched || isPitchMatched
+                    ? '딱 맞았어요!'
+                    : '요정이 지켜보는 중'}
+                </span>
+              </div>
+            </div>
             <div className="mt-3 grid grid-cols-5 gap-2">
               {DANSO_NOTES.map((note) => (
                 <button
@@ -274,6 +302,19 @@ export function PracticeTab({
         onPreviewNote={handlePreviewNote}
         onSongComplete={onSongComplete}
       />
+
+      {/* 우측 하단 고정: 단소 불며 응원하는 아기 호랑이 마스코트 */}
+      <div className="pointer-events-none fixed right-4 bottom-24 z-40 hidden items-end gap-2 sm:flex">
+        <span className="rounded-2xl border border-amber-200 bg-white/95 px-3 py-1.5 text-xs font-extrabold text-amber-900 shadow-md">
+          {isPerfect ? '최고의 소리야! 🐯✨' : '어흥! 천천히 불어 보자!'}
+        </span>
+        <img
+          src="/tiger.png"
+          alt="응원하는 아기 호랑이 마스코트"
+          className="h-20 w-20 object-contain drop-shadow-md animate-bounce"
+          style={{ animationDuration: '2.4s' }}
+        />
+      </div>
     </div>
   );
 }
