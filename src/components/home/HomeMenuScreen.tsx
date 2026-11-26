@@ -102,7 +102,7 @@ export function HomeMenuScreen({ progress, onEditName }: HomeMenuScreenProps) {
           <div>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/85 px-3 py-1 text-xs font-bold text-amber-800 shadow-2xs">
               <Sparkles className="h-3.5 w-3.5 text-amber-500" />
-              오늘도 즐겁게 단소를 연주해 볼까?
+              소리마루에 오신 것을 환영합니다!
             </span>
 
             <div className="mt-2.5 flex flex-wrap items-center gap-2.5">

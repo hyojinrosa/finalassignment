@@ -65,7 +65,7 @@ export const APP_TABS: TabItem[] = [
 export function TabNavigation() {
   return (
     <nav
-      aria-label="Finger Hero 학습 모드"
+      aria-label="소리마루 학습 모드"
       className="border-b border-amber-200/70 bg-white/80 backdrop-blur-sm"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

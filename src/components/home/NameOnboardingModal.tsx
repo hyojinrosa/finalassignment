@@ -43,11 +43,11 @@ export function NameOnboardingModal({
 
           <span className="mt-3 inline-flex items-center gap-1 rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800">
             <Sparkles className="h-3.5 w-3.5" />
-            Finger Hero 단소 교실
+            소리마루 단소 교실
           </span>
 
           <h2 className="mt-3 text-xl font-black text-stone-900">
-            안녕! 너의 이름을 알려줄래?
+            소리마루에 온 걸 환영해!
           </h2>
           <p className="mt-1.5 text-xs leading-relaxed text-stone-600">
             이름을 입력하면 연습한 곡과 리듬 게임 최고 점수가

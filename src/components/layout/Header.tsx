@@ -30,10 +30,10 @@ export function Header({
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-lg font-black tracking-tight text-stone-900 sm:text-xl">
-                Finger Hero
+                소리마루
               </h1>
               <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-bold text-amber-800">
-                단소 에디션
+                단소 교실
               </span>
             </div>
             <p className="text-xs text-stone-500 sm:text-sm">

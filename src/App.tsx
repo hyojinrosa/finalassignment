@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { LoadingScreen } from './components/common/LoadingScreen';
 import { HomeMenuScreen } from './components/home/HomeMenuScreen';
 import { NameOnboardingModal } from './components/home/NameOnboardingModal';
 import { MainLayout } from './components/layout/MainLayout';
@@ -28,8 +29,16 @@ export function App() {
   );
   const [isEditingName, setIsEditingName] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isEntering, setIsEntering] = useState(true);
 
   const audioPitch = useAudioPitch();
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setIsEntering(false);
+    }, 550);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   const showOnboarding = !progress.userName || isEditingName;
   const primaryBadge = getPrimaryBadge(progress);
@@ -67,6 +76,10 @@ export function App() {
     setProgress(empty);
     setIsEditingName(false);
   }, []);
+
+  if (isEntering) {
+    return <LoadingScreen message="소리마루로 입장하는 중..." />;
+  }
 
   return (
     <>
