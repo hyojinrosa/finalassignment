@@ -11,11 +11,13 @@ import { ScoreViewer } from '../score/ScoreViewer';
 interface PracticeTabProps {
   audioPitch: UseAudioPitchReturn;
   onCameraActiveChange: (isActive: boolean) => void;
+  onSongComplete?: (songTitle: string) => void;
 }
 
 export function PracticeTab({
   audioPitch,
   onCameraActiveChange,
+  onSongComplete,
 }: PracticeTabProps) {
   const [targetNoteId, setTargetNoteId] = useState<DansoYulmyeong>(
     DANSO_NOTES[0].id,
@@ -270,6 +272,7 @@ export function PracticeTab({
         liveMatchedNote={liveScoreMatchedNote}
         onTargetNoteChange={setTargetNoteId}
         onPreviewNote={handlePreviewNote}
+        onSongComplete={onSongComplete}
       />
     </div>
   );

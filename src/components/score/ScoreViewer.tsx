@@ -40,6 +40,8 @@ interface ScoreViewerProps {
   onTargetNoteChange?: (note: DansoYulmyeong) => void;
   /** 악보 칸 클릭/재생 시 음정 미리듣기 콜백 */
   onPreviewNote?: (note: DansoYulmyeong) => void;
+  /** 한 곡을 끝까지 완주했을 때 호출되는 콜백 */
+  onSongComplete?: (songTitle: string) => void;
 }
 
 const NOTE_LOOKUP = Object.fromEntries(
@@ -59,6 +61,7 @@ export function ScoreViewer({
   virtualPulse = null,
   onTargetNoteChange,
   onPreviewNote,
+  onSongComplete,
 }: ScoreViewerProps) {
   const [selectedScoreId, setSelectedScoreId] = useState(
     DANSO_SAMPLE_SCORES[0].id,
@@ -121,11 +124,12 @@ export function ScoreViewer({
       const nextIdx = findNextPlayableIndex(selectedScore.cells, prevIdx);
       if (nextIdx === -1) {
         setIsCompleted(true);
+        onSongComplete?.(selectedScore.title);
         return prevIdx;
       }
       return nextIdx;
     });
-  }, [selectedScore.cells]);
+  }, [selectedScore.cells, selectedScore.title, onSongComplete]);
 
   // 1) 독립 메트로놈 타이머 (연습 모드 중에도 켜고 끌 수 있음)
   useEffect(() => {
@@ -182,6 +186,7 @@ export function ScoreViewer({
           setIsBeatPlaying(false);
           setBeatProgress(0);
           setIsCompleted(true);
+          onSongComplete?.(selectedScore.title);
           return;
         }
         currentIdx = nextIdx;

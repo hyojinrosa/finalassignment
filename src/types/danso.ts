@@ -1,4 +1,10 @@
-export type AppTabId = 'learning' | 'practice' | 'rhythm' | 'virtual';
+export type AppTabId =
+  | 'home'
+  | 'learning'
+  | 'practice'
+  | 'virtual'
+  | 'rhythm'
+  | 'chatbot';
 
 export type DansoYulmyeong = '중' | '임' | '무' | '황' | '태';
 

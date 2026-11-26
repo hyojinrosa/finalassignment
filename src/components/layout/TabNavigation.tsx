@@ -1,8 +1,17 @@
-import { BookOpen, Gamepad2, HandMetal, Radio } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
+import {
+  BookOpen,
+  Crown,
+  Gamepad2,
+  HandMetal,
+  Home,
+  Radio,
+} from 'lucide-react';
 import type { AppTabId } from '../../types/danso';
 
 export interface TabItem {
   id: AppTabId;
+  path: string;
   label: string;
   description: string;
   icon: typeof BookOpen;
@@ -10,79 +19,95 @@ export interface TabItem {
 
 export const APP_TABS: TabItem[] = [
   {
+    id: 'home',
+    path: '/',
+    label: '메인 홈',
+    description: '메뉴 선택 & 나의 기록',
+    icon: Home,
+  },
+  {
     id: 'learning',
-    label: '학습 애니메이션',
-    description: '중·임·무·황·태 운지 & 정간보',
+    path: '/learning',
+    label: '기초 학습',
+    description: '단소 원리 & 호흡 애니메이션',
     icon: BookOpen,
   },
   {
     id: 'practice',
-    label: '실시간 연습',
-    description: '웹캠 운지 인식 + 음정 코칭',
+    path: '/practice',
+    label: 'AI 실시간 연습',
+    description: '웹캠 운지 + 마이크 교정',
     icon: Radio,
   },
   {
+    id: 'virtual',
+    path: '/virtual',
+    label: '가상 악기 연주',
+    description: '악보 보며 터치 연주',
+    icon: HandMetal,
+  },
+  {
     id: 'rhythm',
-    label: '리듬 게임 & 악보',
-    description: '정간보 뷰어 + 낙하 노트 게임',
+    path: '/rhythm',
+    label: '장단 리듬 게임',
+    description: '율명 노트 & 장단 익히기',
     icon: Gamepad2,
   },
   {
-    id: 'virtual',
-    label: '가상 악기 연주',
-    description: '실물 비율 단소 터치 연주',
-    icon: HandMetal,
+    id: 'chatbot',
+    path: '/chatbot',
+    label: '세종대왕 챗봇',
+    description: 'AI 단소 도우미 (준비 중)',
+    icon: Crown,
   },
 ];
 
-interface TabNavigationProps {
-  activeTab: AppTabId;
-  onChangeTab: (tab: AppTabId) => void;
-}
-
-export function TabNavigation({ activeTab, onChangeTab }: TabNavigationProps) {
+export function TabNavigation() {
   return (
     <nav
       aria-label="Finger Hero 학습 모드"
-      className="border-b border-stone-200 bg-stone-50/90 backdrop-blur-sm"
+      className="border-b border-amber-200/70 bg-white/80 backdrop-blur-sm"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-2 py-2.5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-3">
+        <div className="grid grid-cols-2 gap-2 py-2 sm:grid-cols-3 lg:grid-cols-6">
           {APP_TABS.map((tab) => {
             const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
 
             return (
-              <button
+              <NavLink
                 key={tab.id}
-                type="button"
-                role="tab"
-                aria-selected={isActive}
-                onClick={() => onChangeTab(tab.id)}
-                className={`flex items-center gap-3 rounded-xl border px-3.5 py-2.5 text-left transition-all ${
-                  isActive
-                    ? 'border-bamboo-500 bg-white text-bamboo-700 shadow-sm ring-1 ring-bamboo-500/20'
-                    : 'border-transparent bg-transparent text-stone-600 hover:border-stone-200 hover:bg-white/70 hover:text-stone-900'
-                }`}
-              >
-                <span
-                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
+                to={tab.path}
+                end={tab.path === '/'}
+                className={({ isActive }) =>
+                  `flex items-center gap-2.5 rounded-2xl border px-3 py-2 text-left transition-all ${
                     isActive
-                      ? 'bg-bamboo-600 text-white'
-                      : 'bg-stone-200/70 text-stone-600'
-                  }`}
-                >
-                  <Icon className="h-4 w-4" />
-                </span>
-                <span className="min-w-0">
-                  <span className="block truncate text-sm font-semibold">
-                    {tab.label}
-                  </span>
-                  <span className="block truncate text-xs text-stone-500">
-                    {tab.description}
-                  </span>
-                </span>
-              </button>
+                      ? 'border-emerald-400 bg-emerald-50/90 text-emerald-800 shadow-xs ring-1 ring-emerald-400/30'
+                      : 'border-transparent bg-transparent text-stone-600 hover:border-amber-200 hover:bg-amber-50/50 hover:text-stone-900'
+                  }`
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    <span
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl ${
+                        isActive
+                          ? 'bg-emerald-500 text-white'
+                          : 'bg-stone-100 text-stone-600'
+                      }`}
+                    >
+                      <Icon className="h-4 w-4" />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block truncate text-xs font-extrabold">
+                        {tab.label}
+                      </span>
+                      <span className="block truncate text-[10px] text-stone-500">
+                        {tab.description}
+                      </span>
+                    </span>
+                  </>
+                )}
+              </NavLink>
             );
           })}
         </div>

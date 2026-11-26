@@ -35,10 +35,47 @@
   }
 }
 
+@keyframes beat-shake {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  20% {
+    transform: translate(-3px, 2px) scale(1.012);
+  }
+  45% {
+    transform: translate(3px, -2px) scale(1.008);
+  }
+  70% {
+    transform: translate(-2px, 1px) scale(1.003);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes particle-burst {
+  0% {
+    transform: translate(-50%, -50%) scale(0.4);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--tx, 0px)), calc(-50% + var(--ty, -40px))) scale(1.15);
+    opacity: 0;
+  }
+}
+
 .animate-breath-flow {
   animation: breath-flow 1.8s ease-in-out infinite;
 }
 
 .animate-finger-tap {
   animation: finger-tap 1.4s ease-in-out infinite;
+}
+
+.animate-beat-shake {
+  animation: beat-shake 0.24s ease-out;
+}
+
+.animate-particle-burst {
+  animation: particle-burst 0.55s ease-out forwards;
 }

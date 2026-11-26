@@ -17,7 +17,13 @@ const DANSO_REAL_PROPORTIONS = [
   { index: 4, label: '제5공 (아래 구멍)', topPercent: 81.2, isBack: false },
 ] as const;
 
-export function VirtualInstrumentTab() {
+interface VirtualInstrumentTabProps {
+  onSongComplete?: (songTitle: string) => void;
+}
+
+export function VirtualInstrumentTab({
+  onSongComplete,
+}: VirtualInstrumentTabProps) {
   const [holes, setHoles] = useState<HoleStates>([true, true, true, true, false]);
   const [isBlowing, setIsBlowing] = useState(false);
   const [isYeokchwi, setIsYeokchwi] = useState(false);
@@ -342,6 +348,7 @@ export function VirtualInstrumentTab() {
           inputMode="virtual"
           virtualPulse={virtualPulse}
           onPreviewNote={handlePreviewNote}
+          onSongComplete={onSongComplete}
         />
       </section>
     </div>
